@@ -40,7 +40,6 @@ export class AzafataController {
         'application/json': {
           schema: getModelSchemaRef(Azafata, {
             title: 'NewAzafata',
-            exclude: ['id'],
           }),
         },
       },

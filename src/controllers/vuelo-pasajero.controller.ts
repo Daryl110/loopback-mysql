@@ -161,4 +161,33 @@ export class VueloPasajeroController {
   async deleteById(@param.path.number('id') id: number): Promise<void> {
     await this.vueloPasajeroRepository.deleteById(id);
   }
+
+  @get('/vuelo-pasajeros/reservas', {
+    responses: {
+      '200': {
+        description: 'Array of VueloPasajero model instances with reservas in state',
+        content: {
+          'application/json': {
+            schema: {type: 'array', items: getModelSchemaRef(VueloPasajero)},
+          },
+        },
+      },
+    },
+  })
+  async getReservas(): Promise<VueloPasajero[]> {
+    return this.vueloPasajeroRepository.getReservas();
+  }
+
+  @put('/vuelo-pasajeros/{id}/cancelar', {
+    responses: {
+      '204': {
+        description: 'cancelar reserva',
+      },
+    },
+  })
+  async cancelarReserva(
+    @param.path.number('id') id: number
+  ): Promise<void> {
+    await this.vueloPasajeroRepository.cancelarReserva(id);
+  }
 }

@@ -40,7 +40,6 @@ export class VendedorController {
         'application/json': {
           schema: getModelSchemaRef(Vendedor, {
             title: 'NewVendedor',
-            exclude: ['id'],
           }),
         },
       },

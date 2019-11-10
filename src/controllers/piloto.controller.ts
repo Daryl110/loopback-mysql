@@ -40,7 +40,6 @@ export class PilotoController {
         'application/json': {
           schema: getModelSchemaRef(Piloto, {
             title: 'NewPiloto',
-            exclude: ['id'],
           }),
         },
       },

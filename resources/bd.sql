@@ -29,7 +29,12 @@ CREATE TABLE IF NOT EXISTS `aerolinea` (
   CONSTRAINT `fk_aerolinea_aeropuerto1` FOREIGN KEY (`idAeropuerto`) REFERENCES `aeropuerto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.aerolinea: ~1 rows (aproximadamente)
+DELETE FROM `aerolinea`;
+/*!40000 ALTER TABLE `aerolinea` DISABLE KEYS */;
+INSERT INTO `aerolinea` (`id`, `nombre`, `descripcion`, `idAeropuerto`) VALUES
+	(1, 'Avianca', 'aerolinea descripcion', 1);
+/*!40000 ALTER TABLE `aerolinea` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.aeropuerto
 DROP TABLE IF EXISTS `aeropuerto`;
@@ -40,7 +45,13 @@ CREATE TABLE IF NOT EXISTS `aeropuerto` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.aeropuerto: ~2 rows (aproximadamente)
+DELETE FROM `aeropuerto`;
+/*!40000 ALTER TABLE `aeropuerto` DISABLE KEYS */;
+INSERT INTO `aeropuerto` (`id`, `nombre`, `direccion`) VALUES
+	(1, 'El Eden', 'Armenia/Quindio'),
+	(2, 'El Dorado', 'Bogota/Cundinamarca');
+/*!40000 ALTER TABLE `aeropuerto` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.avion
 DROP TABLE IF EXISTS `avion`;
@@ -55,7 +66,12 @@ CREATE TABLE IF NOT EXISTS `avion` (
   CONSTRAINT `fk_avion_aerolinea1` FOREIGN KEY (`idAerolinea`) REFERENCES `aerolinea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.avion: ~1 rows (aproximadamente)
+DELETE FROM `avion`;
+/*!40000 ALTER TABLE `avion` DISABLE KEYS */;
+INSERT INTO `avion` (`id`, `cantidadPuestos`, `marca`, `modelo`, `idAerolinea`) VALUES
+	(1, 250, 'AvioPlus', 'MZ-4790', 1);
+/*!40000 ALTER TABLE `avion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.azafata
 DROP TABLE IF EXISTS `azafata`;
@@ -65,7 +81,29 @@ CREATE TABLE IF NOT EXISTS `azafata` (
   CONSTRAINT `fk_vuelo_persona1` FOREIGN KEY (`id`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.azafata: ~1 rows (aproximadamente)
+DELETE FROM `azafata`;
+/*!40000 ALTER TABLE `azafata` DISABLE KEYS */;
+INSERT INTO `azafata` (`id`) VALUES
+	(2);
+/*!40000 ALTER TABLE `azafata` ENABLE KEYS */;
+
+-- Volcando estructura para tabla aerolinea.clase
+DROP TABLE IF EXISTS `clase`;
+CREATE TABLE IF NOT EXISTS `clase` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla aerolinea.clase: ~3 rows (aproximadamente)
+DELETE FROM `clase`;
+/*!40000 ALTER TABLE `clase` DISABLE KEYS */;
+INSERT INTO `clase` (`id`, `descripcion`) VALUES
+	(1, 'VIP'),
+	(2, 'Economica'),
+	(3, 'Turista');
+/*!40000 ALTER TABLE `clase` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.inventario
 DROP TABLE IF EXISTS `inventario`;
@@ -77,7 +115,10 @@ CREATE TABLE IF NOT EXISTS `inventario` (
   CONSTRAINT `fk_inventario_aerolinea1` FOREIGN KEY (`id`) REFERENCES `aerolinea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.inventario: ~0 rows (aproximadamente)
+DELETE FROM `inventario`;
+/*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.inventarioproducto
 DROP TABLE IF EXISTS `inventarioproducto`;
@@ -93,7 +134,10 @@ CREATE TABLE IF NOT EXISTS `inventarioproducto` (
   CONSTRAINT `fk_inventarioProducto_producto1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.inventarioproducto: ~0 rows (aproximadamente)
+DELETE FROM `inventarioproducto`;
+/*!40000 ALTER TABLE `inventarioproducto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventarioproducto` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.pasajero
 DROP TABLE IF EXISTS `pasajero`;
@@ -104,7 +148,12 @@ CREATE TABLE IF NOT EXISTS `pasajero` (
   CONSTRAINT `fk_pasajero_persona1` FOREIGN KEY (`id`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.pasajero: ~1 rows (aproximadamente)
+DELETE FROM `pasajero`;
+/*!40000 ALTER TABLE `pasajero` DISABLE KEYS */;
+INSERT INTO `pasajero` (`id`) VALUES
+	(3);
+/*!40000 ALTER TABLE `pasajero` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.persona
 DROP TABLE IF EXISTS `persona`;
@@ -117,7 +166,15 @@ CREATE TABLE IF NOT EXISTS `persona` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.persona: ~4 rows (aproximadamente)
+DELETE FROM `persona`;
+/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+INSERT INTO `persona` (`id`, `nombre`, `cedula`, `apellido`, `edad`) VALUES
+	(1, 'Daryl', '1094971007', 'Ospina', '15'),
+	(2, 'Alvaro', '1094981008', 'Corrales', '35'),
+	(3, 'Jhon', '1094991009', 'Maricon', '390'),
+	(4, 'Nico', '1094910010', 'Cabi', '66');
+/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.piloto
 DROP TABLE IF EXISTS `piloto`;
@@ -128,7 +185,12 @@ CREATE TABLE IF NOT EXISTS `piloto` (
   CONSTRAINT `fk_piloto_persona1` FOREIGN KEY (`id`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.piloto: ~1 rows (aproximadamente)
+DELETE FROM `piloto`;
+/*!40000 ALTER TABLE `piloto` DISABLE KEYS */;
+INSERT INTO `piloto` (`id`) VALUES
+	(1);
+/*!40000 ALTER TABLE `piloto` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.producto
 DROP TABLE IF EXISTS `producto`;
@@ -139,7 +201,10 @@ CREATE TABLE IF NOT EXISTS `producto` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.producto: ~0 rows (aproximadamente)
+DELETE FROM `producto`;
+/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.promocion
 DROP TABLE IF EXISTS `promocion`;
@@ -150,7 +215,12 @@ CREATE TABLE IF NOT EXISTS `promocion` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.promocion: ~1 rows (aproximadamente)
+DELETE FROM `promocion`;
+/*!40000 ALTER TABLE `promocion` DISABLE KEYS */;
+INSERT INTO `promocion` (`id`, `descripcion`, `porcentaje`) VALUES
+	(1, 'usuario preferencial', 50);
+/*!40000 ALTER TABLE `promocion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.ruta
 DROP TABLE IF EXISTS `ruta`;
@@ -164,7 +234,12 @@ CREATE TABLE IF NOT EXISTS `ruta` (
   CONSTRAINT `fk_ruta_aeropuerto1` FOREIGN KEY (`idAeropuerto`) REFERENCES `aeropuerto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.ruta: ~1 rows (aproximadamente)
+DELETE FROM `ruta`;
+/*!40000 ALTER TABLE `ruta` DISABLE KEYS */;
+INSERT INTO `ruta` (`id`, `descripcion`, `valor`, `idAeropuerto`) VALUES
+	(1, 'Ruta a bogota', 1400500, 2);
+/*!40000 ALTER TABLE `ruta` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.vendedor
 DROP TABLE IF EXISTS `vendedor`;
@@ -175,7 +250,12 @@ CREATE TABLE IF NOT EXISTS `vendedor` (
   CONSTRAINT `fk_pasajero_persona2` FOREIGN KEY (`id`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.vendedor: ~1 rows (aproximadamente)
+DELETE FROM `vendedor`;
+/*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
+INSERT INTO `vendedor` (`id`) VALUES
+	(4);
+/*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.vuelo
 DROP TABLE IF EXISTS `vuelo`;
@@ -195,7 +275,12 @@ CREATE TABLE IF NOT EXISTS `vuelo` (
   CONSTRAINT `fk_vuelo_ruta1` FOREIGN KEY (`idRuta`) REFERENCES `ruta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.vuelo: ~1 rows (aproximadamente)
+DELETE FROM `vuelo`;
+/*!40000 ALTER TABLE `vuelo` DISABLE KEYS */;
+INSERT INTO `vuelo` (`id`, `puestos`, `estado`, `idAvion`, `idPiloto`, `idRuta`) VALUES
+	(1, 250, 'En sala de espera', 1, 1, 1);
+/*!40000 ALTER TABLE `vuelo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.vueloazafata
 DROP TABLE IF EXISTS `vueloazafata`;
@@ -210,7 +295,10 @@ CREATE TABLE IF NOT EXISTS `vueloazafata` (
   CONSTRAINT `fk_vuelo_azafata_vuelo1` FOREIGN KEY (`idVuelo`) REFERENCES `vuelo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.vueloazafata: ~0 rows (aproximadamente)
+DELETE FROM `vueloazafata`;
+/*!40000 ALTER TABLE `vueloazafata` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vueloazafata` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.vuelopasajero
 DROP TABLE IF EXISTS `vuelopasajero`;
@@ -222,16 +310,25 @@ CREATE TABLE IF NOT EXISTS `vuelopasajero` (
   `estado` varchar(45) NOT NULL,
   `idVendedor` int(11) NOT NULL,
   `precio` decimal(10,0) NOT NULL,
+  `idClase` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_vuelopasajero_pasajero` (`idPasajero`),
   KEY `FK_vuelopasajero_vuelo` (`idVuelo`),
   KEY `FK_vuelopasajero_vendedor` (`idVendedor`),
+  KEY `FK_vuelopasajero_clase` (`idClase`),
+  CONSTRAINT `FK_vuelopasajero_clase` FOREIGN KEY (`idClase`) REFERENCES `clase` (`id`),
   CONSTRAINT `FK_vuelopasajero_pasajero` FOREIGN KEY (`idPasajero`) REFERENCES `pasajero` (`id`),
   CONSTRAINT `FK_vuelopasajero_vendedor` FOREIGN KEY (`idVendedor`) REFERENCES `vendedor` (`id`),
   CONSTRAINT `FK_vuelopasajero_vuelo` FOREIGN KEY (`idVuelo`) REFERENCES `vuelo` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.vuelopasajero: ~2 rows (aproximadamente)
+DELETE FROM `vuelopasajero`;
+/*!40000 ALTER TABLE `vuelopasajero` DISABLE KEYS */;
+INSERT INTO `vuelopasajero` (`id`, `idPasajero`, `idVuelo`, `asiento`, `estado`, `idVendedor`, `precio`, `idClase`) VALUES
+	(1, 3, 1, 46, 'CANCELADO', 4, 1400500, 1),
+	(2, 3, 1, 46, 'COMPRADO', 4, 1400500, 1);
+/*!40000 ALTER TABLE `vuelopasajero` ENABLE KEYS */;
 
 -- Volcando estructura para tabla aerolinea.vuelopasajeropromocion
 DROP TABLE IF EXISTS `vuelopasajeropromocion`;
@@ -246,7 +343,10 @@ CREATE TABLE IF NOT EXISTS `vuelopasajeropromocion` (
   CONSTRAINT `fk_vueloPasajeroPromocion_vueloPasajero1` FOREIGN KEY (`idVueloPasajero`) REFERENCES `vuelopasajero` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla aerolinea.vuelopasajeropromocion: ~0 rows (aproximadamente)
+DELETE FROM `vuelopasajeropromocion`;
+/*!40000 ALTER TABLE `vuelopasajeropromocion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vuelopasajeropromocion` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

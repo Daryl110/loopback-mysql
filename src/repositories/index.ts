@@ -15,3 +15,4 @@ export * from './vuelo-azafata.repository';
 export * from './vuelo-pasajero-promocion.repository';
 export * from './vuelo-pasajero.repository';
 export * from './vuelo.repository';
+export * from './clase.repository';

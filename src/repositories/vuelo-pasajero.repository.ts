@@ -13,4 +13,21 @@ export class VueloPasajeroRepository extends DefaultCrudRepository<
   ) {
     super(VueloPasajero, dataSource);
   }
+
+  getReservas(): Promise<(VueloPasajero & VueloPasajeroRelations)[]> {
+    return this.find({ where: {estado: 'RESERVA'}});
+  }
+
+  cancelarReserva(id: number) : Promise<boolean> {
+    return this.findById(id).then(data => {
+      if(data.estado === 'RESERVA'){
+        data.estado = 'CANCELADO';
+        this.updateById(data.id, data);
+        return this.findById(data.id).then(
+          data1 => data1.estado === 'CANCELADO'
+        );
+      }
+      return false;
+    });
+  }
 }

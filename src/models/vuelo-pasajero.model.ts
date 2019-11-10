@@ -45,6 +45,12 @@ export class VueloPasajero extends Entity {
   })
   idVendedor: number;
 
+  @property({
+    type: 'number',
+    required: true,
+  })
+  idClase: number;
+
 
   constructor(data?: Partial<VueloPasajero>) {
     super(data);

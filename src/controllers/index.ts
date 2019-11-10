@@ -15,3 +15,5 @@ export * from './azafata.controller';
 export * from './vuelo-azafata.controller';
 export * from './vuelo.controller';
 export * from './avion.controller';
+export * from './persona.controller';
+export * from './clase.controller';

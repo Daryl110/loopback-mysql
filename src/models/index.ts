@@ -15,3 +15,4 @@ export * from './vuelo-azafata.model';
 export * from './vuelo.model';
 export * from './ruta.model';
 export * from './avion.model';
+export * from './clase.model';

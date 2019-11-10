@@ -40,7 +40,6 @@ export class PasajeroController {
         'application/json': {
           schema: getModelSchemaRef(Pasajero, {
             title: 'NewPasajero',
-            exclude: ['id'],
           }),
         },
       },
