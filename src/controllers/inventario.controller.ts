@@ -1,0 +1,164 @@
+import {
+  Count,
+  CountSchema,
+  Filter,
+  repository,
+  Where,
+} from '@loopback/repository';
+import {
+  post,
+  param,
+  get,
+  getFilterSchemaFor,
+  getModelSchemaRef,
+  getWhereSchemaFor,
+  patch,
+  put,
+  del,
+  requestBody,
+} from '@loopback/rest';
+import {Inventario} from '../models';
+import {InventarioRepository} from '../repositories';
+
+export class InventarioController {
+  constructor(
+    @repository(InventarioRepository)
+    public inventarioRepository : InventarioRepository,
+  ) {}
+
+  @post('/inventarios', {
+    responses: {
+      '200': {
+        description: 'Inventario model instance',
+        content: {'application/json': {schema: getModelSchemaRef(Inventario)}},
+      },
+    },
+  })
+  async create(
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(Inventario, {
+            title: 'NewInventario',
+            exclude: ['id'],
+          }),
+        },
+      },
+    })
+    inventario: Omit<Inventario, 'id'>,
+  ): Promise<Inventario> {
+    return this.inventarioRepository.create(inventario);
+  }
+
+  @get('/inventarios/count', {
+    responses: {
+      '200': {
+        description: 'Inventario model count',
+        content: {'application/json': {schema: CountSchema}},
+      },
+    },
+  })
+  async count(
+    @param.query.object('where', getWhereSchemaFor(Inventario)) where?: Where<Inventario>,
+  ): Promise<Count> {
+    return this.inventarioRepository.count(where);
+  }
+
+  @get('/inventarios', {
+    responses: {
+      '200': {
+        description: 'Array of Inventario model instances',
+        content: {
+          'application/json': {
+            schema: {type: 'array', items: getModelSchemaRef(Inventario)},
+          },
+        },
+      },
+    },
+  })
+  async find(
+    @param.query.object('filter', getFilterSchemaFor(Inventario)) filter?: Filter<Inventario>,
+  ): Promise<Inventario[]> {
+    return this.inventarioRepository.find(filter);
+  }
+
+  @patch('/inventarios', {
+    responses: {
+      '200': {
+        description: 'Inventario PATCH success count',
+        content: {'application/json': {schema: CountSchema}},
+      },
+    },
+  })
+  async updateAll(
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(Inventario, {partial: true}),
+        },
+      },
+    })
+    inventario: Inventario,
+    @param.query.object('where', getWhereSchemaFor(Inventario)) where?: Where<Inventario>,
+  ): Promise<Count> {
+    return this.inventarioRepository.updateAll(inventario, where);
+  }
+
+  @get('/inventarios/{id}', {
+    responses: {
+      '200': {
+        description: 'Inventario model instance',
+        content: {'application/json': {schema: getModelSchemaRef(Inventario)}},
+      },
+    },
+  })
+  async findById(@param.path.number('id') id: number): Promise<Inventario> {
+    return this.inventarioRepository.findById(id);
+  }
+
+  @patch('/inventarios/{id}', {
+    responses: {
+      '204': {
+        description: 'Inventario PATCH success',
+      },
+    },
+  })
+  async updateById(
+    @param.path.number('id') id: number,
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(Inventario, {partial: true}),
+        },
+      },
+    })
+    inventario: Inventario,
+  ): Promise<void> {
+    await this.inventarioRepository.updateById(id, inventario);
+  }
+
+  @put('/inventarios/{id}', {
+    responses: {
+      '204': {
+        description: 'Inventario PUT success',
+      },
+    },
+  })
+  async replaceById(
+    @param.path.number('id') id: number,
+    @requestBody() inventario: Inventario,
+  ): Promise<void> {
+    await this.inventarioRepository.replaceById(id, inventario);
+  }
+
+  @del('/inventarios/{id}', {
+    responses: {
+      '204': {
+        description: 'Inventario DELETE success',
+      },
+    },
+  })
+  async deleteById(@param.path.number('id') id: number): Promise<void> {
+    await this.inventarioRepository.deleteById(id);
+  }
+}
